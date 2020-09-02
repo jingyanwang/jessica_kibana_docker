@@ -2,7 +2,7 @@
 Docker of kibana and elasticsearch
 
 
-## I downlaod the elasticsearch and kibana from 
+## downlaod the elasticsearch and kibana from 
 
 https://artifacts.elastic.co/downloads/kibana/kibana-6.7.1-linux-x86_64.tar.gz 
 
