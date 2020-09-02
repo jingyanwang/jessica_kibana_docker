@@ -10,13 +10,13 @@ and
 
 https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.7.1.tar.gz 
 
-to /Users/jessica/Downloads/
-
-and unzip them.
+to /Users/jessica/Downloads/ and unzip them.
 
 ## build the docker
 
 ```bash
+git clone https://github.com/gaoyuanliang/jessica_kibana_docker.git
+cd jessica_kibana_docker
 docker build -t jessica_kibana:1.0.1 .
 docker run -it -v /Users/jessica/Downloads/:/jessica/ --memory="256g" jessica_kibana:1.0.1
 ```
@@ -31,6 +31,7 @@ wget https://raw.githubusercontent.com/gaoyuanliang/jessica_kibana_docker/master
 mv elasticsearch.yml elasticsearch-6.7.1/config/
 
 elasticsearch-6.7.1/bin/elasticsearch &
+
 kibana-6.7.1-linux-x86_64/bin/kibana &
 ```
 ## view the dashboard at 
