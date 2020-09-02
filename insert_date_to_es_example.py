@@ -6,7 +6,6 @@ es.index(index='test',
 		id='1',
 		body={'document_id':'1'})
 
-
 '''
 you will see the data at http://localhost:9200/test/_search
 '''
