@@ -32,7 +32,11 @@ docker run -it -v /Users/jessica/Downloads/:/jessica/ --memory="256g" jessica_ki
 ```
 
 ## start the service 
+
 ```bash
 elasticsearch-6.7.1/bin/elasticsearch &
 kibana-6.7.1-linux-x86_64/bin/kibana &
 ```
+## view the dashboard at 
+
+http://0.0.0.0:5601
