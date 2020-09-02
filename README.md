@@ -38,3 +38,5 @@ mv elasticsearch.yml /jessica/elasticsearch-6.7.1/config/
 ## view the dashboard at 
 
 http://0.0.0.0:5601
+
+view the indeces at Elasticsearch at http://0.0.0.0:9200/_cat/indices?v
