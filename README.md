@@ -18,7 +18,7 @@ docker run -it \
 -p 0.0.0.0:9200:9200 \
 -p 0.0.0.0:5601:5601 \
 --memory="256g" \
-jessica_kibana:1.0.1
+gaoyuanliang/jessica_kibana:1.0.1
 
 mv /jessica/jessica_kibana_docker/elasticsearch.yml /Downloads/elasticsearch-6.7.1/config/
 /Downloads/elasticsearch-6.7.1/bin/elasticsearch &
