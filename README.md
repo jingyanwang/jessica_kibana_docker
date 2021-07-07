@@ -30,19 +30,6 @@ es_session = jessica_es.start_es('/jessica/elasticsearch-6.7.1')
 
 view the indeces at Elasticsearch at http://0.0.0.0:9200/_cat/indices?v
 
-if blocked, run the commend in kibana
-
-```
-PUT .kibana/_settings
-{
-	"index": {
-	"blocks": {
-		"read_only_allow_delete": "false"
-		}
-	}
-}
-```
-
 ## ingest data to es index
 
 ```python
@@ -81,3 +68,16 @@ for r in jessica_es.search_doc_by_match(
 ```
 
 view kibana dashboard at http://0.0.0.0:5601
+
+if blocked, run the commend in kibana
+
+```
+PUT .kibana/_settings
+{
+	"index": {
+	"blocks": {
+		"read_only_allow_delete": "false"
+		}
+	}
+}
+```
