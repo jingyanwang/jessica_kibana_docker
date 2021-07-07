@@ -34,20 +34,16 @@ RUN tar xvzf kibana-6.7.1-linux-x86_64.tar.gz
 
 WORKDIR /jessica/
 RUN wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.7.1.tar.gz
+
+RUN echo "s7dgs45g1s961"
+
 RUN tar xvzf elasticsearch-6.7.1.tar.gz
-
-RUN echo "41202121515"
-
-RUN git clone https://github.com/gaoyuanliang/jessica_kibana_docker.git
-RUN mv /jessica/jessica_kibana_docker/kibana.yml /jessica/kibana-6.7.1-linux-x86_64/config/
-
-RUN git clone https://github.com/gaoyuanliang/jessica_elasticsearch.git
-RUN mv jessica_elasticsearch/* ./
-RUN rm -r jessica_elasticsearch
-
-EXPOSE 5601/tcp
-EXPOSE 9200/tcp
 
 ENV PYSPARK_PYTHON=/usr/bin/python3
 ENV PYSPARK_DRIVER_PYTHON=/usr/bin/python3
+
+
+RUN git clone https://github.com/gaoyuanliang/jessica_kibana_docker.git
+RUN mv jessica_kibana_docker/* ./
+RUN rm -r jessica_kibana_docker
 ##################Dockerfile##################
