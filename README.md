@@ -23,8 +23,6 @@ import jessica_es
 es_session = jessica_es.start_es('/jessica/elasticsearch-6.7.1')
 ```
 
-view the indeces at Elasticsearch at http://0.0.0.0:9200/_cat/indices?v
-
 ## ingest data to es index
 
 ```python
@@ -35,11 +33,9 @@ jessica_es.insert_doc_to_es(
 	doc_id = 'c')
 ```
 
-check the data of index
+view the data of index at http://0.0.0.0:9200/a/_search?pretty=true
 
-```
-http://0.0.0.0:9200/a/_search?pretty=true
-```
+view the indeces at Elasticsearch at http://0.0.0.0:9200/_cat/indices?v
 
 ## query from index
 
