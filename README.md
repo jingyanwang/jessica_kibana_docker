@@ -1,15 +1,25 @@
 # build and run the docker
 
+build docker
+
 ```bash
 docker build -t gaoyuanliang/jessica_kibana:1.0.2 .
+```
 
+run the docker
+
+```bash
 docker run -it \
 -v /Users/liangyu/Downloads/:/Users/liangyu/Downloads/ \
 -p 0.0.0.0:9200:9200 \
 -p 0.0.0.0:5601:5601 \
 --memory="256g" \
 gaoyuanliang/jessica_kibana:1.0.2 &
+```
 
+enter the docker
+
+```
 docker exec -it 0940e37e5242 bash
 ```
 
