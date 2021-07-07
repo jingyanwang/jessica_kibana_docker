@@ -1,36 +1,21 @@
-# jessica_kibana_docker
-Docker of kibana and elasticsearch
-
-
-## downlaod the elasticsearch from 
-
-https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.7.1.tar.gz 
-
-to /Users/liangyu/Downloads/ and unzip them.
-
-## start the service 
+# build and run the docker
 
 ```bash
-docker pull gaoyuanliang/jessica_kibana:1.0.1
+docker build -t gaoyuanliang/jessica_kibana:1.0.2 .
 
 docker run -it \
--v /Users/liangyu/Downloads/:/Downloads/ \
+-v /Users/liangyu/Downloads/:/Users/liangyu/Downloads/ \
 -p 0.0.0.0:9200:9200 \
 -p 0.0.0.0:5601:5601 \
 --memory="256g" \
-gaoyuanliang/jessica_kibana:1.0.1
-
-mv /jessica/jessica_kibana_docker/elasticsearch.yml /Downloads/elasticsearch-6.7.1/config/
-/Downloads/elasticsearch-6.7.1/bin/elasticsearch &
-
-/jessica/kibana-6.7.1-linux-x86_64/bin/kibana &
+gaoyuanliang/jessica_kibana:1.0.2
 ```
 
 view the dashboard at http://0.0.0.0:5601
 
 view the indeces at Elasticsearch at http://0.0.0.0:9200/_cat/indices?v
 
-##
+# if blocked, run the commend in kibana
 
 ```
 PUT .kibana/_settings
