@@ -2,12 +2,13 @@
 import os
 import re
 import csv
+import time
 import hashlib 
 from elasticsearch import *
 
 def start_es(
 	es_path = "/jessica/elasticsearch-6.7.1",
-	es_port_number = "9200"):
+	es_port_number = "9466"):
 	'''
 	check if es service is already running
 	if yes, return the session
@@ -32,8 +33,8 @@ def start_es(
 	echo "network.host: 0.0.0.0" >> %s/config/elasticsearch.yml
 	"""%(es_path,
 		es_path,
-		es_port_number,
 		es_path,
+		es_port_number,
 		es_path,
 		es_path))
 	'''
@@ -47,13 +48,15 @@ def start_es(
 	otherwise keeps checking, until 100K times
 	'''
 	try_time = 0
-	while(try_time <= 100000):
+	while(try_time <= 100):
 		try_time += 1
 		if os.system(u"""
 		curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_cluster/settings -d '{ "transient": { "cluster.routing.allocation.disk.threshold_enabled": false } }'
 		curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_all/_settings -d '{"index.blocks.read_only_allow_delete": null}'
 		""") == 0:
-			return Elasticsearch([{'host':'localhost','port':9200}])
+			return Elasticsearch([{'host':'localhost','port':int(es_port_number)}])
+		else:
+			time.sleep(10)
 	return None
 
 def insert_doc_to_es(
@@ -71,6 +74,7 @@ def insert_doc_to_es(
 			body = doc_dict)
 	except Exception as e:
 		print(e)
+
 
 def search_doc_by_match(
 	index_name,
@@ -94,6 +98,7 @@ def search_doc_by_match(
 	except:
 		return None
 
+
 def search_doc_by_filter(
 	index_name,
 	field_name,
@@ -113,7 +118,8 @@ def search_doc_by_filter(
 		body = triplet_query_body)
 	return [r['_source'] for r in res['hits']['hits']]
 
-def start_kibana(port_number = "5601"):
+
+def start_kibana(port_number = "5145"):
 	try:
 		'''
 		set the configuration file
@@ -132,5 +138,4 @@ def start_kibana(port_number = "5601"):
 		return 'success'
 	except Exception as e:
 		return str(e)
-
 ###########jessica_es.py###########
