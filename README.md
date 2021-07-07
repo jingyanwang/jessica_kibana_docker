@@ -3,7 +3,7 @@
 build docker
 
 ```bash
-docker build -t gaoyuanliang/jessica_kibana:1.0.2 .
+docker build -t gaoyuanliang/jessica_kibana:1.0.3 .
 ```
 
 run the docker
@@ -11,10 +11,9 @@ run the docker
 ```bash
 docker run -it \
 -v /Users/liangyu/Downloads/:/Users/liangyu/Downloads/ \
--p 0.0.0.0:9200:9200 \
--p 0.0.0.0:5601:5601 \
---memory="256g" \
-gaoyuanliang/jessica_kibana:1.0.2 &
+-p 0.0.0.0:9466:9466 \
+-p 0.0.0.0:5145:5145 \
+gaoyuanliang/jessica_kibana:1.0.3 &
 ```
 
 enter the docker
@@ -32,8 +31,12 @@ docker exec -it 0940e37e5242 bash
 ```python
 import jessica_es
 
-es_session = jessica_es.start_es('/jessica/elasticsearch-6.7.1')
+es_session = jessica_es.start_es(
+	es_path = "/jessica/elasticsearch-6.7.1",
+	es_port_number = "9466")
 ```
+
+check the service at http://0.0.0.0:9466
 
 ## ingest data to es index
 
@@ -45,9 +48,9 @@ jessica_es.insert_doc_to_es(
 	doc_id = 'c')
 ```
 
-view the data of index at http://0.0.0.0:9200/a/_search?pretty=true
+view the data of index at http://0.0.0.0:9466/a/_search?pretty=true
 
-view the indeces at Elasticsearch at http://0.0.0.0:9200/_cat/indices?v
+view the indeces at Elasticsearch at http://0.0.0.0:9466/_cat/indices?v
 
 ## query from index
 
@@ -66,11 +69,14 @@ for r in jessica_es.search_doc_by_match(
 
 ## start kibana
 
-```bash
-/jessica/kibana-6.7.1-linux-x86_64/bin/kibana &
+```python
+jessica_es.start_kibana(
+	kibana_port_number = "5145",
+	es_port_number = "9466",
+	)
 ```
 
-view kibana dashboard at http://0.0.0.0:5601
+view kibana dashboard at http://0.0.0.0:5145
 
 if blocked, run the commend in kibana
 
@@ -86,7 +92,5 @@ PUT .kibana/_settings
 ```
 
 # todo list
-
-1. build kibana start api
 
 2. build api for batch data ingestion from json file or folder
