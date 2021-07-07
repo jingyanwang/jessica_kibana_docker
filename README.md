@@ -20,6 +20,8 @@ gaoyuanliang/jessica_kibana:1.0.2 &
 enter the docker
 
 ```
+docker ps
+
 docker exec -it 0940e37e5242 bash
 ```
 
