@@ -72,4 +72,5 @@ for r in jessica_es.search_doc_by_match(
 ## start kibana
 
 ```bash
+/jessica/kibana-6.7.1-linux-x86_64/bin/kibana &
 ```
