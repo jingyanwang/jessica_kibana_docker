@@ -6,12 +6,20 @@ import hashlib
 from elasticsearch import *
 
 def start_es(es_path):
+	'''
+	check if es service is already running
+	if yes, return the session
+	'''
 	if os.system(u"""
 		curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_cluster/settings -d '{ "transient": { "cluster.routing.allocation.disk.threshold_enabled": false } }'
 		curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_all/_settings -d '{"index.blocks.read_only_allow_delete": null}'
 		""") == 0:
 		return Elasticsearch([{'host':'localhost','port':9200}])
 	###
+	'''
+	if not running, start the service
+	firstly overwrit the configuration file
+	'''
 	os.system(u"""
 	rm %s/config/elasticsearch.yml
 	echo "transport.host: localhost " > %s/config/elasticsearch.yml
@@ -23,9 +31,16 @@ def start_es(es_path):
 		es_path,
 		es_path,
 		es_path))
+	'''
+	the start the docker service
+	'''
 	os.system(u"""
 		%s/bin/elasticsearch &
 		"""%(es_path))
+	'''
+	keeps checking if es is up, if up return the session
+	otherwise keeps checking, until 100K times
+	'''
 	try_time = 0
 	while(try_time <= 100000):
 		try_time += 1
