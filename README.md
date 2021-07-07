@@ -72,3 +72,9 @@ PUT .kibana/_settings
 	}
 }
 ```
+
+# todo list
+
+1. build kibana start api
+
+2. build api for batch data ingestion from json file or folder
