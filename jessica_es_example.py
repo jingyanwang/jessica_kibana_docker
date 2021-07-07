@@ -1,7 +1,7 @@
 ########jessica_es_example.py########
 import jessica_es
 
-es_session = jessica_es.start_es('/home/jessica/elasticsearch-6.7.1')
+es_session = jessica_es.start_es('/jessica/elasticsearch-6.7.1')
 
 jessica_es.insert_doc_to_es(
 	es_session,
@@ -21,6 +21,5 @@ for r in jessica_es.search_doc_by_match(
 	return_entity_max_number = 1,
 	return_entity_min_score = 0):
 	print(r)
-
 
 ########jessica_es_example.py########
