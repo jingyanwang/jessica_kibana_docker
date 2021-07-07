@@ -51,9 +51,11 @@ def start_es(
 	while(try_time <= 100):
 		try_time += 1
 		if os.system(u"""
-		curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_cluster/settings -d '{ "transient": { "cluster.routing.allocation.disk.threshold_enabled": false } }'
-		curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_all/_settings -d '{"index.blocks.read_only_allow_delete": null}'
-		""") == 0:
+			curl -XPUT -H "Content-Type: application/json" http://localhost:%s/_cluster/settings -d '{ "transient": { "cluster.routing.allocation.disk.threshold_enabled": false } }'
+			curl -XPUT -H "Content-Type: application/json" http://localhost:%s/_all/_settings -d '{"index.blocks.read_only_allow_delete": null}'
+			"""%(es_port_number,
+				es_port_number
+				)) == 0:
 			return Elasticsearch([{'host':'localhost','port':int(es_port_number)}])
 		else:
 			time.sleep(10)
