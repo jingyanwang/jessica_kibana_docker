@@ -15,7 +15,7 @@ view the dashboard at http://0.0.0.0:5601
 
 view the indeces at Elasticsearch at http://0.0.0.0:9200/_cat/indices?v
 
-# if blocked, run the commend in kibana
+## if blocked, run the commend in kibana
 
 ```
 PUT .kibana/_settings
@@ -28,7 +28,7 @@ PUT .kibana/_settings
 }
 ```
 
-# es
+# elasticsearch
 
 ## start the service
 
@@ -65,4 +65,11 @@ for r in jessica_es.search_doc_by_match(
 	return_entity_max_number = 1,
 	return_entity_min_score = 0):
 	print(r)
+```
+
+# kibana
+
+## start kibana
+
+```bash
 ```
