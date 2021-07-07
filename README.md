@@ -13,11 +13,6 @@ gaoyuanliang/jessica_kibana:1.0.2 &
 docker exec -it 0940e37e5242 bash
 ```
 
-view the dashboard at http://0.0.0.0:5601
-
-
-
-
 # elasticsearch
 
 ## start the service
