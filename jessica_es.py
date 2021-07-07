@@ -5,16 +5,20 @@ import csv
 import hashlib 
 from elasticsearch import *
 
-def start_es(es_path):
+def start_es(
+	es_path = "/jessica/elasticsearch-6.7.1",
+	es_port_number = "9200"):
 	'''
 	check if es service is already running
 	if yes, return the session
 	'''
 	if os.system(u"""
-		curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_cluster/settings -d '{ "transient": { "cluster.routing.allocation.disk.threshold_enabled": false } }'
-		curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_all/_settings -d '{"index.blocks.read_only_allow_delete": null}'
-		""") == 0:
-		return Elasticsearch([{'host':'localhost','port':9200}])
+		curl -XPUT -H "Content-Type: application/json" http://localhost:%s/_cluster/settings -d '{ "transient": { "cluster.routing.allocation.disk.threshold_enabled": false } }'
+		curl -XPUT -H "Content-Type: application/json" http://localhost:%s/_all/_settings -d '{"index.blocks.read_only_allow_delete": null}'
+		"""%(es_port_number,
+			es_port_number
+			)) == 0:
+		return Elasticsearch([{'host':'localhost','port':int(es_port_number)}])
 	###
 	'''
 	if not running, start the service
@@ -24,10 +28,11 @@ def start_es(es_path):
 	rm %s/config/elasticsearch.yml
 	echo "transport.host: localhost " > %s/config/elasticsearch.yml
 	echo "transport.tcp.port: 9300 " >> %s/config/elasticsearch.yml
-	echo "http.port: 9200" >> %s/config/elasticsearch.yml
+	echo "http.port: %s" >> %s/config/elasticsearch.yml
 	echo "network.host: 0.0.0.0" >> %s/config/elasticsearch.yml
 	"""%(es_path,
 		es_path,
+		es_port_number,
 		es_path,
 		es_path,
 		es_path))
@@ -107,4 +112,25 @@ def search_doc_by_filter(
 		index = index_name,
 		body = triplet_query_body)
 	return [r['_source'] for r in res['hits']['hits']]
+
+def start_kibana(port_number = "5601"):
+	try:
+		'''
+		set the configuration file
+		'''
+		os.system(u"""
+			rm /jessica/kibana-6.7.1-linux-x86_64/config/kibana.yml
+			echo "server.port: %s" > /jessica/kibana-6.7.1-linux-x86_64/config/kibana.yml
+			echo "server.host: "0.0.0.0" >> /jessica/kibana-6.7.1-linux-x86_64/config/kibana.yml
+			"""%(port_number))
+		'''
+		start the service
+		'''
+		os.system(u"""
+			/jessica/kibana-6.7.1-linux-x86_64/bin/kibana &
+			""")
+		return 'success'
+	except Exception as e:
+		return str(e)
+
 ###########jessica_es.py###########
