@@ -121,16 +121,21 @@ def search_doc_by_filter(
 	return [r['_source'] for r in res['hits']['hits']]
 
 
-def start_kibana(port_number = "5145"):
+def start_kibana(
+	kibana_port_number = "5145",
+	es_port_number = "9466",
+	):
 	try:
 		'''
 		set the configuration file
 		'''
 		os.system(u"""
-			rm /jessica/kibana-6.7.1-linux-x86_64/config/kibana.yml
-			echo "server.port: %s" > /jessica/kibana-6.7.1-linux-x86_64/config/kibana.yml
-			echo "server.host: "0.0.0.0" >> /jessica/kibana-6.7.1-linux-x86_64/config/kibana.yml
-			"""%(port_number))
+		rm /jessica/kibana-6.7.1-linux-x86_64/config/kibana.yml
+		echo "server.port: %s" > /jessica/kibana-6.7.1-linux-x86_64/config/kibana.yml
+		echo "server.host: \"0.0.0.0\"" >> /jessica/kibana-6.7.1-linux-x86_64/config/kibana.yml
+		echo "elasticsearch.hosts: [\"http://localhost:%s\"]" >> /jessica/kibana-6.7.1-linux-x86_64/config/kibana.yml
+		"""%(kibana_port_number,
+		es_port_number))
 		'''
 		start the service
 		'''
