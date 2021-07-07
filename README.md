@@ -8,7 +8,9 @@ docker run -it \
 -p 0.0.0.0:9200:9200 \
 -p 0.0.0.0:5601:5601 \
 --memory="256g" \
-gaoyuanliang/jessica_kibana:1.0.2
+gaoyuanliang/jessica_kibana:1.0.2 &
+
+docker exec -it 0940e37e5242 bash
 ```
 
 view the dashboard at http://0.0.0.0:5601
