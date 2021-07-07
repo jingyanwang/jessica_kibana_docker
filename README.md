@@ -74,3 +74,9 @@ for r in jessica_es.search_doc_by_match(
 ```bash
 /jessica/kibana-6.7.1-linux-x86_64/bin/kibana &
 ```
+
+## view kibana dashboard at
+
+```bash
+http://0.0.0.0:5601
+```
