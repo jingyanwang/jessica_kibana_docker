@@ -90,7 +90,7 @@ jessica_es.start_kibana(
 
 view kibana dashboard at http://0.0.0.0:5145
 
-<img src="screencapture-192-168-1-103-5145-app-kibana-2021-07-08-21_12_19.png" width="300">
+<img src="screencapture-192-168-1-103-5145-app-kibana-2021-07-08-21_12_19.png" width="800">
 
 if blocked, run the commend in kibana
 
