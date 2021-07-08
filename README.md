@@ -49,12 +49,14 @@ check the service at http://0.0.0.0:9466
 ```python
 jessica_es.insert_doc_to_es(
 	es_session,
-	es_index = 'a',
-	doc_dict = {'a':'b'},
-	doc_id = 'c')
+	es_index = 'customers',
+	doc_dict = {'CustomerName':'Alfreds Futterkiste',
+		'Address':'Obere Str. 57',
+		'Age':26},
+	doc_id = '1')
 ```
 
-view the data of index at http://0.0.0.0:9466/a/_search?pretty=true
+view the data of index at http://0.0.0.0:9466/customers/_search?pretty=true
 
 view the indeces at Elasticsearch at http://0.0.0.0:9466/_cat/indices?v
 
@@ -62,9 +64,9 @@ view the indeces at Elasticsearch at http://0.0.0.0:9466/_cat/indices?v
 
 ```python
 for r in jessica_es.search_doc_by_match(
-	index_name = 'a',
-	entity_name = 'b',
-	field_name = 'a',
+	index_name = 'customers',
+	entity_name = 'Alfreds Futterkiste',
+	field_name = 'CustomerName',
 	es_session = es_session,
 	return_entity_max_number = 1,
 	return_entity_min_score = 0):
