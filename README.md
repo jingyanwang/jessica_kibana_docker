@@ -58,6 +58,8 @@ jessica_es.insert_doc_to_es(
 
 view the data of index at http://0.0.0.0:9466/customers/_search?pretty=true
 
+<img src="WeChat%20Screenshot_20210708210827.png" width="300">
+
 view the indeces at Elasticsearch at http://0.0.0.0:9466/_cat/indices?v
 
 ## query from index
