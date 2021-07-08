@@ -1,9 +1,15 @@
 # build and run the docker
 
-build docker
+build docker 
 
 ```bash
 docker build -t gaoyuanliang/jessica_kibana:1.0.3 .
+```
+
+or pull the docker from docker hub
+
+```bash
+docker pull gaoyuanliang/jessica_kibana:1.0.3
 ```
 
 run the docker
