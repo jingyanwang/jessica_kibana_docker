@@ -101,4 +101,4 @@ PUT .kibana/_settings
 
 # todo list
 
-2. build api for batch data ingestion from json file or folder
+1. build api for batch data ingestion from json file or folder
