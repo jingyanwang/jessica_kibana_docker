@@ -86,6 +86,19 @@ jessica_es.start_kibana(
 
 view kibana dashboard at http://0.0.0.0:5145
 
+if blocked, run the commend in kibana
+
+```
+PUT .kibana/_settings
+{
+	"index": {
+	"blocks": {
+		"read_only_allow_delete": "false"
+		}
+	}
+}
+```
+
 # todo list
 
 2. build api for batch data ingestion from json file or folder
