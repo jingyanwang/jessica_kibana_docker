@@ -58,7 +58,7 @@ jessica_es.insert_doc_to_es(
 
 view the data of index at http://0.0.0.0:9466/customers/_search?pretty=true
 
-<img src="WeChat%20Screenshot_20210708210827.png" width="300">
+<img src="WeChat%20Screenshot_20210708210827.png" width="500">
 
 view the indeces at Elasticsearch at http://0.0.0.0:9466/_cat/indices?v
 
@@ -75,7 +75,7 @@ for r in jessica_es.search_doc_by_match(
 	print(r)
 ```
 
-<img src="WeChat%20Screenshot_20210708211044.png" width="300">
+<img src="WeChat%20Screenshot_20210708211044.png" width="600">
 
 # kibana
 
