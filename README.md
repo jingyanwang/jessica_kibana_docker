@@ -1,4 +1,4 @@
-# build and run the docker
+# deploy the docker
 
 build docker 
 
