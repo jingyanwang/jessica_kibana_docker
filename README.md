@@ -56,6 +56,17 @@ view the data of index at http://0.0.0.0:9466/customers/_search?pretty=true
 
 view the indeces at Elasticsearch at http://0.0.0.0:9466/_cat/indices?v
 
+## ingest a json file of data to an es index
+
+```python
+jessica_es.ingest_json_to_es_index(
+	json_file = 'data_sample.json',
+	es_index = "customers",
+	es_session = es_session,
+	document_id_feild = 'CustomerName',
+	)
+```
+
 ## query from index
 
 ```python
