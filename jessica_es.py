@@ -3,6 +3,7 @@ import os
 import re
 import csv
 import time
+import pandas
 import hashlib 
 from elasticsearch import *
 
@@ -77,7 +78,6 @@ def insert_doc_to_es(
 	except Exception as e:
 		print(e)
 
-
 def search_doc_by_match(
 	index_name,
 	entity_name,
@@ -100,7 +100,6 @@ def search_doc_by_match(
 	except:
 		return None
 
-
 def search_doc_by_filter(
 	index_name,
 	field_name,
@@ -119,7 +118,6 @@ def search_doc_by_filter(
 		index = index_name,
 		body = triplet_query_body)
 	return [r['_source'] for r in res['hits']['hits']]
-
 
 def start_kibana(
 	kibana_port_number = "5145",
@@ -145,4 +143,55 @@ def start_kibana(
 		return 'success'
 	except Exception as e:
 		return str(e)
+
+
+
+'''
+ingest a json file's data to a index
+
+es_session = start_es(
+	es_path = "/jessica/elasticsearch-6.7.1",
+	es_port_number = "9466")
+
+
+ingest_json_to_es_index(
+	json_file = '/Downloads/data_sample.json',
+	es_index = "customers",
+	es_session = es_session,
+	document_id_feild = 'CustomerName',
+	)
+
+http://192.168.1.114:9466/customers/_search?pretty=true
+
+'''
+
+def ingest_json_to_es_index(
+	json_file,
+	es_index,
+	es_session,
+	document_id_feild = 'document_id',
+	):
+	data = pandas.read_json(
+		json_file,
+		lines = True,
+		orient = "records",
+		)
+	def insert_record_to_es(r):
+		try:
+			result = insert_doc_to_es(
+				es_session,
+				es_index = es_index,
+				doc_dict = r.to_dict(),
+				doc_id = r[document_id_feild])
+			r['status'] = 'success'
+			return r
+		except Exception as e:
+			r['status'] = e
+			print(r)
+			return r
+	data = data.apply(
+		insert_record_to_es, 
+		axis = 1)
+	return data
+
 ###########jessica_es.py###########
