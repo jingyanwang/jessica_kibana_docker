@@ -3,17 +3,17 @@
 pull the docker from docker hub
 
 ```bash
-docker pull gaoyuanliang/jessica_kibana:1.0.3
+docker pull gaoyuanliang/jessica_kibana:1.0.4
 ```
 
 run the docker
 
 ```bash
-docker run -it \
--v /Users/liangyu/Downloads/:/Users/liangyu/Downloads/ \
--p 0.0.0.0:9466:9466 \
--p 0.0.0.0:5145:5145 \
-gaoyuanliang/jessica_kibana:1.0.3 &
+docker run -it ^
+-v "C:\Users\gaoyu\Downloads":/Downloads/ ^
+-p 0.0.0.0:9466:9466 ^
+-p 0.0.0.0:5145:5145 ^
+gaoyuanliang/jessica_kibana:1.0.4 &
 ```
 
 enter the docker
