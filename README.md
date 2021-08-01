@@ -40,6 +40,8 @@ check the service at http://0.0.0.0:9466
 
 ## ingest data to es index
 
+### ingest one record to index
+
 ```python
 jessica_es.insert_doc_to_es(
 	es_session,
@@ -50,13 +52,7 @@ jessica_es.insert_doc_to_es(
 	doc_id = '1')
 ```
 
-view the data of index at http://0.0.0.0:9466/customers/_search?pretty=true
-
-<img src="WeChat%20Screenshot_20210708210827.png" width="300">
-
-view the indeces at Elasticsearch at http://0.0.0.0:9466/_cat/indices?v
-
-## ingest a json file of data to an es index
+### ingest a json file of data to an es index
 
 ```python
 jessica_es.ingest_json_to_es_index(
@@ -66,6 +62,13 @@ jessica_es.ingest_json_to_es_index(
 	document_id_feild = 'CustomerName',
 	)
 ```
+
+view the data of index at http://0.0.0.0:9466/customers/_search?pretty=true
+
+<img src="WeChat%20Screenshot_20210708210827.png" width="300">
+
+view the indeces at Elasticsearch at http://0.0.0.0:9466/_cat/indices?v
+
 
 ## query from index
 
