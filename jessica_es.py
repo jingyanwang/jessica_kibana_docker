@@ -222,8 +222,8 @@ def start_kibana(
 		start the service
 		'''
 		os.system(u"""
-			/jessica/kibana-6.7.1-linux-x86_64/bin/kibana &
-			""")
+			%s/bin/kibana &
+			"""%(kibana_path))
 		return 'success'
 	except Exception as e:
 		return str(e)
