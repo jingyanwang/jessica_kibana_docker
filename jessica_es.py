@@ -228,4 +228,48 @@ def start_kibana(
 	except Exception as e:
 		return str(e)
 
+
+'''
+ingest the json files of a folder of folders, the folder is the output of spark writh repartioned to 
+each record each file
+'''
+
+def ingest_partitioned_json_to_es(
+	es_data_json_path,
+	index_name,
+	document_id_feild = "document_id",
+	):
+	'''
+	find all the sub folders
+	'''
+	es_folders = listdir(es_data_json_path) 
+	es_folders = ['%s/%s'%(es_data_json_path,f) for f in es_folders]
+	####
+	'''
+	find all the json files
+	'''
+	files = []
+	for e in es_folders:
+		try:
+			files += [join(e, f) 
+				for f in listdir(e) 
+				if isfile(join(e, f))
+				and bool(re.search(r'.+\.json$', f))]
+		except:
+			pass
+	####
+	'''
+	ingest each json file to the index
+	'''
+	for f in files:
+		try:
+			df = jessica_es.ingest_json_to_es_index(
+				json_file = f,
+				es_index = index_name,
+				es_session = es_session,
+				document_id_feild = document_id_feild,
+				)
+		except Exception as e:
+			print(e)
+
 ###########jessica_es.py###########
