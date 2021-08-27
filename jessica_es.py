@@ -194,7 +194,7 @@ def ingest_json_to_es_index(
 				es_session,
 				es_index = es_index,
 				doc_dict = r1,
-				doc_id = r[document_id_feild])
+				doc_id = r1[document_id_feild])
 			r['status'] = 'success'
 			return r
 		except Exception as e:
