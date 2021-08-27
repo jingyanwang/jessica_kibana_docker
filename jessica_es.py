@@ -10,6 +10,13 @@ from os.path import isfile, join
 
 from elasticsearch import *
 
+def value_is_none(value):
+	if value is None:
+		return True
+	if pandas.isna(value):
+		return True
+	return False
+
 def start_es(
 	es_path = "/jessica/elasticsearch-6.7.1",
 	es_port_number = "9466"):
@@ -171,6 +178,7 @@ def ingest_json_to_es_index(
 	es_index,
 	es_session,
 	document_id_feild = 'document_id',
+	check_value_is_none = True,
 	):
 	data = pandas.read_json(
 		json_file,
@@ -179,10 +187,13 @@ def ingest_json_to_es_index(
 		)
 	def insert_record_to_es(r):
 		try:
+			r1 = r.to_dict()
+			if check_value_is_none is True:
+				r1 = {k: v for k, v in r1.items() if value_is_none(v) is False}
 			result = insert_doc_to_es(
 				es_session,
 				es_index = es_index,
-				doc_dict = r.to_dict(),
+				doc_dict = r1,
 				doc_id = r[document_id_feild])
 			r['status'] = 'success'
 			return r
@@ -194,7 +205,6 @@ def ingest_json_to_es_index(
 		insert_record_to_es, 
 		axis = 1)
 	return data
-
 
 def start_kibana(
 	kibana_path = '/jessica/kibana-6.7.1-linux-x86_64',
