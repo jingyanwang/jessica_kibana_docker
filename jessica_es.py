@@ -237,6 +237,7 @@ each record each file
 def ingest_partitioned_json_to_es(
 	es_data_json_path,
 	index_name,
+	es_session,
 	document_id_feild = "document_id",
 	):
 	'''
