@@ -264,7 +264,7 @@ def ingest_partitioned_json_to_es(
 	'''
 	for f in files:
 		try:
-			df = jessica_es.ingest_json_to_es_index(
+			df = ingest_json_to_es_index(
 				json_file = f,
 				es_index = index_name,
 				es_session = es_session,
