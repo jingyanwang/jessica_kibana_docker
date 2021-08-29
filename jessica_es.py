@@ -11,10 +11,16 @@ from os.path import isfile, join
 from elasticsearch import *
 
 def value_is_none(value):
-	if value is None:
-		return True
-	if pandas.isna(value):
-		return True
+	try:
+		if value is None:
+			return True
+	except:
+		pass
+	try:
+		if pandas.isna(value):
+			return True
+	except:
+		pass
 	return False
 
 def start_es(
@@ -199,7 +205,6 @@ def ingest_json_to_es_index(
 			return r
 		except Exception as e:
 			r['status'] = e
-			print(r)
 			return r
 	data = data.apply(
 		insert_record_to_es, 
