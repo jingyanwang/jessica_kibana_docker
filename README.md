@@ -37,7 +37,7 @@ es_session = jessica_es.start_es(
 	es_port_number = "9466")
 ```
 
-check the service at http://0.0.0.0:9466
+check the service at http://localhost:9466
 
 ## ingest data to es index
 
@@ -64,11 +64,11 @@ jessica_es.ingest_json_to_es_index(
 	)
 ```
 
-view the data of index at http://0.0.0.0:9466/customers/_search?pretty=true
+view the data of index at http://localhost:9466/customers/_search?pretty=true
 
 <img src="WeChat%20Screenshot_20210708210827.png" width="300">
 
-view the indeces at Elasticsearch at http://0.0.0.0:9466/_cat/indices?v
+view the indeces at Elasticsearch at http://localhost:9466/_cat/indices?v
 
 
 ## query from index
@@ -97,7 +97,7 @@ jessica_es.start_kibana(
 	)
 ```
 
-view kibana dashboard at http://0.0.0.0:5145
+view kibana dashboard at http://localhost:5145
 
 <img src="screencapture-192-168-1-103-5145-app-kibana-2021-07-08-21_12_19.png" width="800">
 
