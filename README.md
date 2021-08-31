@@ -11,6 +11,7 @@ run the docker
 ```bash
 docker run -it ^
 -v "C:\Users\gaoyuan.liang\Downloads":/Downloads/ ^
+-v "C:\Users\gaoyuan.liang\Documents":/Documents/ ^
 -p 0.0.0.0:9466:9466 ^
 -p 0.0.0.0:5145:5145 ^
 gaoyuanliang/jessica_kibana:1.0.5
