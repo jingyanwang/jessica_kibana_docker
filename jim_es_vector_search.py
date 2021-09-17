@@ -120,6 +120,7 @@ def search_by_vector(
 	source = "1 / (1 + l2norm(params.query_vector, '{}'))".format(vector_field_name)
 	if similarity_measure == 'cosine':
 		source = "cosineSimilarity(params.query_vector, '{}') + 1.0".format(vector_field_name)
+	vector_dim_size = len(query_vector)
 	q_str ={ 
 		"size": vector_dim_size,
 		"query": {
