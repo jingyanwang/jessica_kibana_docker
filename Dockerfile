@@ -7,8 +7,6 @@ RUN apt-get install -y wget
 RUN apt-get install -y gcc 
 RUN apt-get install -y git 
 RUN apt-get install -y curl
-
-RUN apt-get update
 RUN apt-get install -y python3-dev
 RUN apt-get install -y python3-pip
 
@@ -28,20 +26,35 @@ RUN chmod 777 /jessica/
 RUN useradd -u 8877 jessica
 USER jessica
 
+######
+
 WORKDIR /jessica/
 RUN wget https://artifacts.elastic.co/downloads/kibana/kibana-6.7.1-linux-x86_64.tar.gz
 RUN tar xvzf kibana-6.7.1-linux-x86_64.tar.gz
 
 WORKDIR /jessica/
 RUN wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.7.1.tar.gz
-
-RUN echo "s7dgs45g1s961"
-
 RUN tar xvzf elasticsearch-6.7.1.tar.gz
+
+######
+
+RUN wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.4-linux-x86_64.tar.gz
+RUN wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.4-linux-x86_64.tar.gz.sha512
+RUN shasum -a 512 -c elasticsearch-7.13.4-linux-x86_64.tar.gz.sha512 
+RUN tar -xzf elasticsearch-7.13.4-linux-x86_64.tar.gz
+
+######
+
+RUN curl -O https://artifacts.elastic.co/downloads/kibana/kibana-7.13.4-linux-x86_64.tar.gz
+RUN curl https://artifacts.elastic.co/downloads/kibana/kibana-7.13.4-linux-x86_64.tar.gz.sha512 | shasum -a 512 -c - 
+RUN tar -xzf kibana-7.13.4-linux-x86_64.tar.gz
+
+######
 
 ENV PYSPARK_PYTHON=/usr/bin/python3
 ENV PYSPARK_DRIVER_PYTHON=/usr/bin/python3
 
+RUN echo "s1dg3sd12g"
 
 RUN git clone https://github.com/gaoyuanliang/jessica_kibana_docker.git
 RUN mv jessica_kibana_docker/* ./
