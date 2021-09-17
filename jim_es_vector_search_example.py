@@ -21,7 +21,7 @@ jim_es_vector_search.ingest_json_to_es_index(
 	document_id_feild = 'document_id',
 	)
 
-jim_es_vector_searchsearch_by_vector(
+jim_es_vector_search.search_by_vector(
 	index_name = 'logo',
 	vector_field_name = 'logo_embedding',
 	query_vector = [1.0,2.2,3.3],
